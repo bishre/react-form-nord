@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-// import './App.css';
+// import uuid from 'uuid';
 import Programs from './Components/Programs.js';
 import AddProgram from './Components/AddProgram.js';
+import dataSet from './dataSet.json';
 
 class App extends Component {
   constructor() {
@@ -11,29 +12,24 @@ class App extends Component {
     }
   }
   componentWillMount() {
-    this.setState({programs: [
-        {
-          title: 'Business Website',
-          category: 'Web Design'
-        },
-        {
-          title: 'Social App',
-          category: 'Mobile Development'
-        },
-        {
-          title: 'Ecommerce Shopping Cart',
-          category: 'Web Development'
-        }
-      ]});
+    this.setState({programs: dataSet });
   }
-  handleAddPrograms(project){
-    console.log(project);
+  handleAddPrograms(program){
+    let programs=this.state.programs;
+    programs.push(program);
+    this.setState({programs:programs});
+  }
+  handleDeleteProgram(id) {
+    let programs=this.state.programs;
+    let index=programs.findIndex(x=>x.id === id);
+    programs.splice(index, 1);
+    this.setState({programs:programs})
   }
   render() {
     return (
       <div className="App">
         <AddProgram addProgram={this.handleAddPrograms.bind(this)} />
-        <Programs programs={this.state.programs}/>
+        <Programs programs={this.state.programs} onDelete={this.handleDeleteProgram.bind(this)}/>
       </div>
     );
   }

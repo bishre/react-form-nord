@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 // import ProgramItem from './Components/ProgramItem.js';
+import uuid from 'uuid';
 
 class AddProgram extends Component {
   constructor() {
     super();
     this.state = {
-      newProject:{}
+      newProgram:{}
     }
   }
   handleSubmit(e) {
-    if(this.refs.title.value===''){
+    if(this.refs.id.value===''){
       alert('Title is required');
     }
     else {
       this.setState({
-        newProject:{
-          title: this.refs.title.value,
-          category: this.refs.category.value
+        newProgram:{
+          id: this.refs.id.value,
+          name: this.refs.name.value,
+          email: this.refs.email.value,
+          phone: this.refs.phone.value,
         }}, function(){
           this.props.addProgram(this.state.newProgram);
         })
@@ -27,12 +30,18 @@ class AddProgram extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div>
-          <label>Title</label>
-          <input type='text' ref='title'/>
+          <label>ID</label>
+          <input type='text' ref='id'/>
         </div>
         <div>
-          <label>Category</label>
-          <input type='text' ref='category'/>
+          <label>Name</label>
+          <input type='text' ref='name'/>
+        </div><div>
+          <label>Email</label>
+          <input type='text' ref='email'/>
+        </div><div>
+          <label>Phone</label>
+          <input type='text' ref='phone'/>
         </div>
         <input type='submit' value='Submit' />
       </form>
