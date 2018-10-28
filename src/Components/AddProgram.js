@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // import ProgramItem from './Components/ProgramItem.js';
-import uuid from 'uuid';
 
 class AddProgram extends Component {
   constructor() {
@@ -12,6 +11,16 @@ class AddProgram extends Component {
   handleSubmit(e) {
     if(this.refs.id.value===''){
       alert('Title is required');
+    }
+
+    else if(this.props.isEdit) {
+      var updatedProgram = {
+        id: this.props.isEdit,
+        name: this.refs.name.value,
+        email: this.refs.email.value,
+        phone: this.refs.phone.value
+      }
+      this.props.onProgramUpdate(updatedProgram);
     }
     else {
       this.setState({
@@ -26,22 +35,25 @@ class AddProgram extends Component {
     }
     e.preventDefault();
   }
+  onChange(e) {
+    this.props.changeValue(e.target.value);
+  }
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div>
           <label>ID</label>
-          <input type='text' ref='id'/>
+          <input type='text' value={this.props.program.id} ref='id' onChange={this.onChange.bind(this)}/>
         </div>
         <div>
           <label>Name</label>
-          <input type='text' ref='name'/>
+          <input type='text' value={this.props.program.name} ref='name' onChange={this.onChange.bind(this)}/>
         </div><div>
           <label>Email</label>
-          <input type='text' ref='email'/>
+          <input type='text' value={this.props.program.email} ref='email' onChange={this.onChange.bind(this)}/>
         </div><div>
           <label>Phone</label>
-          <input type='text' ref='phone'/>
+          <input type='text' value={this.props.program.phone} ref='phone' onChange={this.onChange.bind(this)}/>
         </div>
         <input type='submit' value='Submit' />
       </form>

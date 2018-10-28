@@ -8,6 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      isEdit: 0,
+      program:[{id:'', name:'', email:'', phone:''}],
       programs:[]
     }
   }
@@ -25,11 +27,46 @@ class App extends Component {
     programs.splice(index, 1);
     this.setState({programs:programs})
   }
+  handleEditProgram(project) {
+    this.setState({
+      program: project,
+      isEdit: project.id
+    });
+    console.log(this.state.program);
+  }
+  handleChange(text) {
+    this.setState({
+      program:text
+    })
+  }
+  handleProgramUpdate(program) {
+    let programs=this.state.programs;
+    let index=programs.findIndex(x=>x.id===program.id);
+    programs.splice(index, 1);
+    programs.push(program);
+    this.setState({programs:programs})
+  }
+  sortBy(key) {
+    let programs=this.state.programs;
+    this.setState({
+      programs: programs.sort((a,b)=>a[key]>b[key])
+    })
+  }
   render() {
     return (
       <div className="App">
-        <AddProgram addProgram={this.handleAddPrograms.bind(this)} />
-        <Programs programs={this.state.programs} onDelete={this.handleDeleteProgram.bind(this)}/>
+        <AddProgram
+          addProgram={this.handleAddPrograms.bind(this)}
+          {...this.state}
+          changeValue={this.handleChange.bind(this)}
+          onProgramUpdate={this.handleProgramUpdate.bind(this)}
+        />
+        <Programs
+          programs={this.state.programs}
+          onDelete={this.handleDeleteProgram.bind(this)}
+          onEdit={this.handleEditProgram.bind(this)}
+          sortBy={this.sortBy.bind(this)}
+        />
       </div>
     );
   }
