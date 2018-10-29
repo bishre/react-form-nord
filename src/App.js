@@ -32,7 +32,6 @@ class App extends Component {
       program: project,
       isEdit: project.id
     });
-    console.log(this.state.program);
   }
   handleChange(project) {
     var newProgram={
@@ -50,7 +49,7 @@ class App extends Component {
     let index=programs.findIndex(x=>x.id===program.id);
     programs.splice(index, 1);
     programs.push(program);
-    this.setState({programs:programs, isEdit:0})
+    this.setState({programs:programs, isEdit:0});
   }
   sortBy(key) {
     let programs=this.state.programs;

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 // import ProgramItem from './Components/ProgramItem.js';
 
 class AddProgram extends Component {
-  constructor() {
-    super();
-    this.state = {
-      newProgram:{}
-    }
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     newProgram:{}
+  //   }
+  // }
   handleSubmit(e) {
     if(this.refs.id.value===''){
       alert('Title is required');
@@ -23,16 +23,22 @@ class AddProgram extends Component {
       this.props.onProgramUpdate(updatedProgram);
     }
     else {
-      this.setState({
-        newProgram:{
-          id: this.refs.id.value,
-          name: this.refs.name.value,
-          email: this.refs.email.value,
-          phone: this.refs.phone.value,
-        }}, function(){
-          this.props.addProgram(this.state.newProgram);
-          this.setState({newProgram:''})
-        })
+      var newProgram={
+        id: this.refs.id.value,
+        name: this.refs.name.value,
+        email: this.refs.email.value,
+        phone: this.refs.phone.value,
+      }
+      this.props.addProgram(newProgram);
+      // this.setState({
+      //   newProgram:{
+      //     id: this.refs.id.value,
+      //     name: this.refs.name.value,
+      //     email: this.refs.email.value,
+      //     phone: this.refs.phone.value,
+      //   }}, function(){
+      //     this.props.addProgram(this.state.newProgram);
+      //   })
     }
     e.preventDefault();
   }
