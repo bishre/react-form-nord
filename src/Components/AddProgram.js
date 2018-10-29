@@ -31,6 +31,7 @@ class AddProgram extends Component {
           phone: this.refs.phone.value,
         }}, function(){
           this.props.addProgram(this.state.newProgram);
+          this.setState({newProgram:''})
         })
     }
     e.preventDefault();

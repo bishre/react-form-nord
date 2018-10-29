@@ -44,7 +44,7 @@ class Programs extends Component {
           <tbody>
             {
               this.props.programs.map(program=>(
-                <tr>
+                <tr key={program.id}>
                   <td>{program.id}</td>
                   <td>{program.name}</td>
                   <td>{program.email}</td>

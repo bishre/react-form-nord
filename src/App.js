@@ -9,7 +9,7 @@ class App extends Component {
     super();
     this.state = {
       isEdit: 0,
-      program:[{id:'', name:'', email:'', phone:''}],
+      program:{id:'', name:'', email:'', phone:''},
       programs:[]
     }
   }
@@ -34,9 +34,15 @@ class App extends Component {
     });
     console.log(this.state.program);
   }
-  handleChange(text) {
+  handleChange(project) {
+    var newProgram={
+      id: project.id,
+      name: project.name,
+      email: project.email,
+      phone: project.phone
+    }
     this.setState({
-      program:text
+      program:newProgram
     })
   }
   handleProgramUpdate(program) {
@@ -44,7 +50,7 @@ class App extends Component {
     let index=programs.findIndex(x=>x.id===program.id);
     programs.splice(index, 1);
     programs.push(program);
-    this.setState({programs:programs})
+    this.setState({programs:programs, isEdit:0})
   }
   sortBy(key) {
     let programs=this.state.programs;
