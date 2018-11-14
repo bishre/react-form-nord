@@ -1,44 +1,29 @@
 import React, { Component } from 'react';
 // import ProgramItem from './Components/ProgramItem.js';
+import './AddProgram.css';
 
 class AddProgram extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     newProgram:{}
-  //   }
-  // }
   handleSubmit(e) {
-    if(this.refs.id.value===''){
-      alert('Title is required');
+    if(this.refs.name.value===''){
+      alert('Name is required');
     }
 
-    else if(this.props.isEdit) {
-      var updatedProgram = {
-        id: this.props.isEdit,
-        name: this.refs.name.value,
-        email: this.refs.email.value,
-        phone: this.refs.phone.value
-      }
-      this.props.onProgramUpdate(updatedProgram);
-    }
+    // else if(this.props.isEdit) {
+    //   var updatedProgram = {
+    //     name: this.refs.name.value,
+    //     email: this.refs.email.value,
+    //     phone: this.refs.phone.value
+    //   }
+    //   this.props.onProgramUpdate(updatedProgram);
+    // }
     else {
       var newProgram={
-        id: this.refs.id.value,
+        id: Date.now(),
         name: this.refs.name.value,
         email: this.refs.email.value,
         phone: this.refs.phone.value,
       }
       this.props.addProgram(newProgram);
-      // this.setState({
-      //   newProgram:{
-      //     id: this.refs.id.value,
-      //     name: this.refs.name.value,
-      //     email: this.refs.email.value,
-      //     phone: this.refs.phone.value,
-      //   }}, function(){
-      //     this.props.addProgram(this.state.newProgram);
-      //   })
     }
     e.preventDefault();
   }
@@ -47,23 +32,22 @@ class AddProgram extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div>
-          <label>ID</label>
-          <input type='text' value={this.props.program.id} ref='id' onChange={this.onChange.bind(this)}/>
-        </div>
-        <div>
-          <label>Name</label>
-          <input type='text' value={this.props.program.name} ref='name' onChange={this.onChange.bind(this)}/>
-        </div><div>
-          <label>Email</label>
-          <input type='text' value={this.props.program.email} ref='email' onChange={this.onChange.bind(this)}/>
-        </div><div>
-          <label>Phone</label>
-          <input type='text' value={this.props.program.phone} ref='phone' onChange={this.onChange.bind(this)}/>
-        </div>
-        <input type='submit' value='Submit' />
-      </form>
+      <div className="form-group row">
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <div className="form-group col-md-3">
+            <input className="form-control" type='text' placeholder="Full name" ref='name' onChange={this.onChange.bind(this)} required/>
+          </div>
+          <div className="form-group col-md-4">
+            <input className="form-control" type='text' placeholder="Email Address" ref='email' onChange={this.onChange.bind(this)} required/>
+          </div>
+          <div className="form-group col-md-3">
+            <input className="form-control" type='text' placeholder="Phone number" ref='phone' onChange={this.onChange.bind(this)} required/>
+          </div>
+          <div className="form-group col-md-2">
+            <input className="btn btn-basic" style={{float:'right'}} type='submit' value='Add new'/>
+          </div>
+        </form>
+      </div>
     );
   }
 }

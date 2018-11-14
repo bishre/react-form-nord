@@ -1,0 +1,20 @@
+.form-group {
+}
+
+.form label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-control-lg {
+  margin-left: 16px;
+  padding-left: 0;
+}
+
+.form-inline {
+  margin: 0;
+  padding: 0;
+}
+
+.form-control {
+  height: 40px;
+}

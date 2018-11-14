@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import uuid from 'uuid';
+import './App.css';
+import logo from './logo.png';
 import Programs from './Components/Programs.js';
 import AddProgram from './Components/AddProgram.js';
 import dataSet from './dataSet.json';
@@ -8,11 +9,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isEdit: 0,
-      program:{id:'', name:'', email:'', phone:''},
+      isEdit: '',
+      program:{name:'', email:'', phone:''},
       programs:[]
     }
   }
+
   componentWillMount() {
     this.setState({programs: dataSet });
   }
@@ -21,18 +23,13 @@ class App extends Component {
     programs.push(program);
     this.setState({programs:programs});
   }
-  handleDeleteProgram(id) {
+  handleDeleteProgram(name) {
     let programs=this.state.programs;
-    let index=programs.findIndex(x=>x.id === id);
+    let index=programs.findIndex(x=>x.name === name);
     programs.splice(index, 1);
     this.setState({programs:programs})
   }
-  handleEditProgram(project) {
-    this.setState({
-      program: project,
-      isEdit: project.id
-    });
-  }
+
   handleChange(project) {
     var newProgram={
       id: project.id,
@@ -46,10 +43,11 @@ class App extends Component {
   }
   handleProgramUpdate(program) {
     let programs=this.state.programs;
-    let index=programs.findIndex(x=>x.id===program.id);
+    let index=programs.findIndex(x=>x.name===this.state.isEdit);
+    console.log(index);
     programs.splice(index, 1);
     programs.push(program);
-    this.setState({programs:programs, isEdit:0});
+    this.setState({programs:programs, isEdit:''});
   }
   sortBy(key) {
     let programs=this.state.programs;
@@ -60,18 +58,34 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddProgram
-          addProgram={this.handleAddPrograms.bind(this)}
-          {...this.state}
-          changeValue={this.handleChange.bind(this)}
-          onProgramUpdate={this.handleProgramUpdate.bind(this)}
-        />
-        <Programs
-          programs={this.state.programs}
-          onDelete={this.handleDeleteProgram.bind(this)}
-          onEdit={this.handleEditProgram.bind(this)}
-          sortBy={this.sortBy.bind(this)}
-        />
+        <div className="App-header">
+          <img src={logo} className="logo" alt="logo"/>
+          <h3>Nord Software</h3>
+        </div>
+        <div className="list-title">
+          <h2>List of Participants</h2>
+        </div>
+        <div className="app-body">
+          <div className="addProgram">
+            <AddProgram
+              addProgram={this.handleAddPrograms.bind(this)}
+              {...this.state}
+              changeValue={this.handleChange.bind(this)}
+              // onProgramUpdate={this.handleProgramUpdate.bind(this)}
+            />
+          </div>
+
+          <div className="programs">
+            <Programs
+              {...this.state}
+              onDelete={this.handleDeleteProgram.bind(this)}
+              onEdit={this.handleProgramUpdate.bind(this)}
+              sortBy={this.sortBy.bind(this)}
+              changeInput={this.handleChange.bind(this)}
+            />
+          </div>
+
+        </div>
       </div>
     );
   }

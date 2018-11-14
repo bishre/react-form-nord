@@ -1,26 +1,65 @@
 import React, { Component } from 'react';
 
+const cellStyle = {
+  verticalAlign: 'middle'
+}
+
 class ProgramItem extends Component {
-  deleteItem(id) {
-    this.props.onDelete(id);
+  constructor() {
+    super();
+    this.state = {
+      editing: false,
+      name: '',
+      email: '',
+      phone: ''
+    }
   }
-  editItem(project) {
-    this.props.onEdit(project);
+  handleClick() {
+    this.setState({
+      editing: true
+    })
+  };
+
+  cancelEdit() {
+    this.setState({
+      editing: false
+    })
   }
+
+  saveChanges() {
+    this.props.handleClick();
+  }
+
+  handleChange(e) {
+    this.props.changeValue(e.target.value);
+  }
+
+
   render() {
+    let textOrInput;
+    if (this.state.editing) {
+      textOrInput =
+      <tr key={this.props.id}>
+        <td><input className="form-control" type='text' ref='name' value={this.props.name} onChange={this.handleChange.bind(this)}/></td>
+        <td><input className="form-control" type='text' ref='email' value={this.props.email} onChange={this.handleChange.bind(this)}/></td>
+        <td><input className="form-control" type='text' ref='phone' value={this.props.phone} onChange={this.handleChange.bind(this)}/></td>
+        <td><input type="submit" className="btn btn-default" onClick={this.cancelEdit.bind(this)} value="Cancel"/></td>
+        <td><input type="submit" className="btn btn-primary" onClick={this.saveChanges.bind(this)} value="Save"/></td>
+      </tr>
+    } else {
+      textOrInput=
+      <tr>
+        <td style={cellStyle}>{this.props.name}</td>
+        <td style={cellStyle}>{this.props.email}</td>
+        <td style={cellStyle}>{this.props.phone}</td>
+        <td style={cellStyle}><i className="fas fa-pencil-alt" onClick={this.handleClick.bind(this)}></i></td>
+        <td style={cellStyle}><i className="fas fa-trash" onClick={this.props.handleDelete}></i></td>
+      </tr>
+    }
     return (
-      // <div>
-      //   <td>{this.props.project.id}</td>
-      //   <td>{this.props.project.name}</td>
-      //   <td>{this.props.project.email}</td>
-      //   <td>{this.props.project.phone}</td>
-      // </div>
-      <li>
-        // <strong>{this.props.project.id}</strong> : {this.props.project.name} :
-        // {this.props.project.email} : {this.props.project.phone}
-        <a href="#" onClick={this.deleteItem.bind(this, this.props.project.id)}>X</a>
-        <a href="#" onClick={this.editItem.bind(this, this.props.project)}>Edit</a>
-      </li>
+      <tbody>
+      {textOrInput}
+      </tbody>
     );
   }
 }
