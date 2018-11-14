@@ -8,10 +8,7 @@ class ProgramItem extends Component {
   constructor() {
     super();
     this.state = {
-      editing: false,
-      name: '',
-      email: '',
-      phone: ''
+      editing: false
     }
   }
   handleClick() {
