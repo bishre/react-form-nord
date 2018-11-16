@@ -1,4 +1,5 @@
-you should have latest version of node and npm installed on your computer.
-run npm i to install all dependencies.
-after that run npm start to run the app on the browser.
-
+install latest version of nodejs and npm on the computer.
+clone this repository to your local drive.
+open command line terminal and navigate to the app folder.
+run npm install on your project root. it will install all the dependencies required for this project.
+after that, run npm start and open the app on the browser at http://localhost:3000/
