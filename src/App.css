@@ -1,6 +1,5 @@
 .App {
   margin: 0;
-  background-color:	#D3D3D3;
 }
 
 .header {
@@ -14,13 +13,13 @@
 
 .logo {
   align-self: flex-start;
-  margin: 2em;
-  height: 2em;
+  margin: 32px;
+  height: 32px;
   margin-right: 5px;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #aab3bf;
   min-height: 10vh;
   display: flex;
   flex-direction: row;
@@ -31,8 +30,9 @@
 }
 
 .App-header h3 {
-  height: 2em;
-  margin-top: 2.5em;
+  height: 32px;
+  margin-top: 32px;
+  font-size: 26px;
 }
 
 .App-link {
@@ -41,15 +41,15 @@
 
 .app-body {
   padding: 2em;
-  margin-top: 2em;
-
+  background-color: #e6e9ed;
 }
 
 .list-title {
   margin: 2em;
+  margin-left: 0;
 }
 
-.addProgram {
+.addParticipant {
   background-color: white;
   margin: 16px 0;
   padding: 16px 16px 0 16px;
@@ -57,7 +57,7 @@
   justify-content: center;
 }
 
-.programs {
+.table {
   background-color: white;
   width: 912px;
 }
