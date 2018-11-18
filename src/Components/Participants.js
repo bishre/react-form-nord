@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ParticipantItem from './ParticipantItem.js';
 import './Participants.css';
+import * as type from 'prop-types';
 
-const cellStyle = {
+const headStyle = {
   verticalAlign: 'middle',
   paddingLeft: '24px'
 }
@@ -24,7 +25,6 @@ class Participants extends Component {
           key={project.id}
           index={index}
           {...project}
-          user={this.props.participant}
           handleClick={this.editParticipant.bind(this)}
           handleDelete={this.deleteParticipant.bind(this, project.name)}
           changeValue={this.handleChange.bind(this)}
@@ -35,13 +35,13 @@ class Participants extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th style={cellStyle} className="th-sm col-xs-3">Name
+              <th style={headStyle} className="th-sm col-md-3">Name
                 <i className="fas fa-arrow-down float-right" aria-hidden="true" onClick={()=>this.props.sortBy('name')}></i>
               </th>
-              <th style={cellStyle} className="th-sm col-xs-3">Email address
+              <th style={headStyle} className="th-sm col-md-4">Email address
                 <i className="fas fa-arrow-down float-right" aria-hidden="true" onClick={()=>this.props.sortBy('email')}></i>
               </th>
-              <th style={cellStyle} className="th-sm col-xs-3">Phone number
+              <th style={headStyle} className="th-sm col-md-3">Phone number
                 <i className="fas fa-arrow-down float-right" aria-hidden="true" onClick={()=>this.props.sortBy('phone')}></i>
               </th>
             </tr>
@@ -53,12 +53,11 @@ class Participants extends Component {
   }
 }
 
-// Programs.propTypes = {
-//   programs: React.PropTypes.array,
-//   onDelete: React.PropTypes.func,
-//   onEdit: React.PropTypes.func,
-//   sortBy: React.PropTypes.func,
-//   changeInput: React.PropTypes.func
-// }
+Participants.propTypes = {
+  onDelete: type.PropTypes.func,
+  onEdit: type.PropTypes.func,
+  sortBy: type.PropTypes.func,
+  changeInput: type.PropTypes.func
+}
 
 export default Participants;

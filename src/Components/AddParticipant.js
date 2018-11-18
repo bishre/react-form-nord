@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './AddParticipant.css';
+import * as type from 'prop-types';
 
 class AddParticipant extends Component {
   handleSubmit(e) {
@@ -36,6 +37,10 @@ class AddParticipant extends Component {
       </div>
     );
   }
+}
+
+AddParticipant.propTypes = {
+  addParticipant: type.PropTypes.func,
 }
 
 export default AddParticipant;

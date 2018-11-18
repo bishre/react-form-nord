@@ -20,7 +20,6 @@ class App extends Component {
 
 // button submit event handler function
   handleAddParticipants(value){
-    console.log(value);
     let participants=this.state.participants;
     participants.push(value);
     this.setState({
@@ -54,7 +53,7 @@ class App extends Component {
   sortBy(key) {
     let programs=this.state.participants;
     this.setState({
-      participants: programs.sort((a,b)=>a[key]<b[key])
+      participants: programs.sort((a,b)=>a[key].toLowerCase()>b[key].toLowerCase())
     })
   }
 
@@ -72,11 +71,8 @@ class App extends Component {
           <div className="addParticipant">
             <AddParticipant
               addParticipant={this.handleAddParticipants.bind(this)}
-              currentParticipant={this.state.participant}
             />
           </div>
-
-          <div className="participants">
             <Participants
               {...this.state}
               onDelete={this.handleDeleteParticipant.bind(this)}
@@ -84,7 +80,6 @@ class App extends Component {
               sortBy={this.sortBy.bind(this)}
               changeInput={this.handleChange.bind(this)}
             />
-          </div>
         </div>
       </div>
     );
