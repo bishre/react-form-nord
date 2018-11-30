@@ -53,8 +53,12 @@ class App extends Component {
   sortBy(key) {
     let programs=this.state.participants;
     this.setState({
-      participants: programs.sort((a,b)=>a[key].toLowerCase()>b[key].toLowerCase())
+      participants: programs.sort(function(a,b){
+        if(a[key].toLowerCase()<b[key].toLowerCase()) {return -1}
+        if(a[key].toLowerCase()>b[key].toLowerCase()) {return 1}
+        return 0;
     })
+  })
   }
 
   render() {
